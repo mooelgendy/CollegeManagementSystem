@@ -11,125 +11,195 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
-	
+
 	@Autowired
 	public DatabaseInfo di;
 
 	// Home
 	@RequestMapping("/")
 	public ModelAndView home() {
-		return new ModelAndView("home", "command", new Object());
+		try {
+			return new ModelAndView("home", "command", new Object());
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
+
 	// Departments Requests
 	@RequestMapping("/addDepartment")
 	public ModelAndView addDepartment(Department d) {
-		return new ModelAndView("addDepartment", "command", d);
+		try {
+			return new ModelAndView("addDepartment", "command", d);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping(value = "/save1", method = RequestMethod.POST)
 	public ModelAndView saveDepartment(@ModelAttribute("d") Department d) {
-		di.insertDepartment(d);
-		return new ModelAndView("redirect:/viewDepartment");
+		try {
+			di.insertDepartment(d);
+			return new ModelAndView("redirect:/viewDepartment");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping(value = "/viewDepartment")
 	public ModelAndView viewDepartment() {
-		List<Department> list1 = di.viewAllDepartments();
-		return new ModelAndView("viewDepartment", "list1", list1);
+		try {
+			List<Department> list1 = di.viewAllDepartments();
+			return new ModelAndView("viewDepartment", "list1", list1);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping(value = "/deleteDepartment/{depId}", method = RequestMethod.GET)
 	public ModelAndView deleteDepartment(@PathVariable int depId) {
-		di.deleteDepartment(depId);
-		return new ModelAndView("redirect:/viewDepartment");
+		try {
+			di.deleteDepartment(depId);
+			return new ModelAndView("redirect:/viewDepartment");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	// Courses Requests
 	@RequestMapping("/addCourses")
 	public ModelAndView addCourses(Courses c) {
-		return new ModelAndView("addCourses", "command", c);
+		try {
+			return new ModelAndView("addCourses", "command", c);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping(value = "/save2", method = RequestMethod.POST)
 	public ModelAndView saveCourses(@ModelAttribute("c") Courses c) {
-		di.insertCourses(c);
-		return new ModelAndView("redirect:/viewCourses");
+		try {
+			di.insertCourses(c);
+			return new ModelAndView("redirect:/viewCourses");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping("/viewCourses")
 	public ModelAndView viewCourses() {
-		List<Courses> list2 = di.viewAllCourses();
-		return new ModelAndView("viewCourses", "list2", list2);
+		try {
+			List<Courses> list2 = di.viewAllCourses();
+			return new ModelAndView("viewCourses", "list2", list2);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping(value = "/deleteCourses/{coId}", method = RequestMethod.GET)
 	public ModelAndView deleteCourses(@PathVariable int coId) {
-		di.deleteCourses(coId);
-		return new ModelAndView("redirect:/viewCourses");
+		try {
+			di.deleteCourses(coId);
+			return new ModelAndView("redirect:/viewCourses");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	// Instructors Requests
 	@RequestMapping("/addInstructors")
 	public ModelAndView addInstructors(Instructors i) {
-		return new ModelAndView("addInstructors", "command", i);
+		try {
+			return new ModelAndView("addInstructors", "command", i);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping(value = "/save3", method = RequestMethod.POST)
 	public ModelAndView saveInstructors(@ModelAttribute("i") Instructors i) {
-		di.insertInstructor(i);
-		return new ModelAndView("redirect:/viewInstructors");
+		try {
+			di.insertInstructor(i);
+			return new ModelAndView("redirect:/viewInstructors");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping("/viewInstructors")
 	public ModelAndView viewInstructors() {
-		List<Instructors> list3 = di.viewAllInstructors();
-		return new ModelAndView("viewInstructors", "list3", list3);
+		try {
+			List<Instructors> list3 = di.viewAllInstructors();
+			return new ModelAndView("viewInstructors", "list3", list3);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping(value = "deleteInstructor/{insId}", method = RequestMethod.GET)
 	public ModelAndView deleteInstructors(@PathVariable int insId) {
-		di.deleteInstructor(insId);
-		return new ModelAndView("redirect:/viewInstructors");
+		try {
+			di.deleteInstructor(insId);
+			return new ModelAndView("redirect:/viewInstructors");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	// Students Requests
 	@RequestMapping("/addStudents")
 	public ModelAndView addStudents(Students s) {
-		return new ModelAndView("addStudents", "command", s);
+		try {
+			return new ModelAndView("addStudents", "command", s);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping(value = "/save4", method = RequestMethod.POST)
 	public ModelAndView saveStudents(@ModelAttribute("s") Students s) {
-		di.insertStudent(s);
-		return new ModelAndView("redirect:/viewStudents");
+		try {
+			di.insertStudent(s);
+			return new ModelAndView("redirect:/viewStudents");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping("/viewStudents")
 	public ModelAndView viewStudents() {
-		List<Students> list4 = di.viewAllStudents();
-		return new ModelAndView("viewStudents", "list4", list4);
+		try {
+			List<Students> list4 = di.viewAllStudents();
+			return new ModelAndView("viewStudents", "list4", list4);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
 
 	@RequestMapping(value = "/deleteStudents/{studId}", method = RequestMethod.GET)
 	public ModelAndView deleteStudents(@PathVariable int studId) {
-		di.deleteStudent(studId);
-		return new ModelAndView("redirect:/viewStudents");
+		try {
+			di.deleteStudent(studId);
+			return new ModelAndView("redirect:/viewStudents");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return new ModelAndView();
 	}
-	
-	//Log in
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
+	//Log in
