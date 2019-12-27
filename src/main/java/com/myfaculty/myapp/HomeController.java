@@ -16,7 +16,7 @@ public class HomeController {
 	public DatabaseInfo di;
 
 	// Home
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
 		try {
 			return new ModelAndView("home", "command", new Object());
@@ -27,7 +27,7 @@ public class HomeController {
 	}
 
 	// Departments Requests
-	@RequestMapping("/addDepartment")
+	@RequestMapping(value = "/addDepartment", method = RequestMethod.GET)
 	public ModelAndView addDepartment(Department d) {
 		try {
 			return new ModelAndView("addDepartment", "command", d);
@@ -48,7 +48,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/viewDepartment")
+	@RequestMapping(value = "/viewDepartment", method = RequestMethod.GET)
 	public ModelAndView viewDepartment() {
 		try {
 			List<Department> list1 = di.viewAllDepartments();
@@ -71,7 +71,7 @@ public class HomeController {
 	}
 
 	// Courses Requests
-	@RequestMapping("/addCourses")
+	@RequestMapping(value = "/addCourses", method = RequestMethod.GET)
 	public ModelAndView addCourses(Courses c) {
 		try {
 			return new ModelAndView("addCourses", "command", c);
@@ -92,7 +92,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping("/viewCourses")
+	@RequestMapping(value = "/viewCourses", method = RequestMethod.GET)
 	public ModelAndView viewCourses() {
 		try {
 			List<Courses> list2 = di.viewAllCourses();
@@ -115,7 +115,7 @@ public class HomeController {
 	}
 
 	// Instructors Requests
-	@RequestMapping("/addInstructors")
+	@RequestMapping(value = "/addInstructors", method = RequestMethod.GET)
 	public ModelAndView addInstructors(Instructors i) {
 		try {
 			return new ModelAndView("addInstructors", "command", i);
@@ -136,7 +136,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping("/viewInstructors")
+	@RequestMapping(value = "/viewInstructors", method = RequestMethod.GET)
 	public ModelAndView viewInstructors() {
 		try {
 			List<Instructors> list3 = di.viewAllInstructors();
@@ -159,7 +159,7 @@ public class HomeController {
 	}
 
 	// Students Requests
-	@RequestMapping("/addStudents")
+	@RequestMapping(value = "/addStudents", method = RequestMethod.GET)
 	public ModelAndView addStudents(Students s) {
 		try {
 			return new ModelAndView("addStudents", "command", s);
@@ -180,7 +180,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping("/viewStudents")
+	@RequestMapping(value = "/viewStudents", method = RequestMethod.GET)
 	public ModelAndView viewStudents() {
 		try {
 			List<Students> list4 = di.viewAllStudents();
