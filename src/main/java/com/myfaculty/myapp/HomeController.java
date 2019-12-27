@@ -3,10 +3,7 @@ package com.myfaculty.myapp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -16,7 +13,7 @@ public class HomeController {
 	public DatabaseInfo di;
 
 	// Home
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping("/")
 	public ModelAndView home() {
 		try {
 			return new ModelAndView("home", "command", new Object());
@@ -27,7 +24,7 @@ public class HomeController {
 	}
 
 	// Departments Requests
-	@RequestMapping(value = "/addDepartment", method = RequestMethod.GET)
+	@GetMapping("/addDepartment")
 	public ModelAndView addDepartment(Department d) {
 		try {
 			return new ModelAndView("addDepartment", "command", d);
@@ -37,7 +34,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/save1", method = RequestMethod.POST)
+	@PostMapping("/save1")
 	public ModelAndView saveDepartment(@ModelAttribute("d") Department d) {
 		try {
 			di.insertDepartment(d);
@@ -48,7 +45,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/viewDepartment", method = RequestMethod.GET)
+	@GetMapping("/viewDepartment")
 	public ModelAndView viewDepartment() {
 		try {
 			List<Department> list1 = di.viewAllDepartments();
@@ -59,7 +56,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/deleteDepartment/{depId}", method = RequestMethod.GET)
+	@GetMapping("/deleteDepartment/{depId}")
 	public ModelAndView deleteDepartment(@PathVariable int depId) {
 		try {
 			di.deleteDepartment(depId);
@@ -71,7 +68,7 @@ public class HomeController {
 	}
 
 	// Courses Requests
-	@RequestMapping(value = "/addCourses", method = RequestMethod.GET)
+	@GetMapping("/addCourses")
 	public ModelAndView addCourses(Courses c) {
 		try {
 			return new ModelAndView("addCourses", "command", c);
@@ -81,7 +78,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/save2", method = RequestMethod.POST)
+	@PostMapping(value = "/save2")
 	public ModelAndView saveCourses(@ModelAttribute("c") Courses c) {
 		try {
 			di.insertCourses(c);
@@ -92,7 +89,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/viewCourses", method = RequestMethod.GET)
+	@GetMapping("/viewCourses")
 	public ModelAndView viewCourses() {
 		try {
 			List<Courses> list2 = di.viewAllCourses();
@@ -103,7 +100,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/deleteCourses/{coId}", method = RequestMethod.GET)
+	@GetMapping("/deleteCourses/{coId}")
 	public ModelAndView deleteCourses(@PathVariable int coId) {
 		try {
 			di.deleteCourses(coId);
@@ -115,7 +112,7 @@ public class HomeController {
 	}
 
 	// Instructors Requests
-	@RequestMapping(value = "/addInstructors", method = RequestMethod.GET)
+	@GetMapping("/addInstructors")
 	public ModelAndView addInstructors(Instructors i) {
 		try {
 			return new ModelAndView("addInstructors", "command", i);
@@ -125,7 +122,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/save3", method = RequestMethod.POST)
+	@PostMapping("/save3")
 	public ModelAndView saveInstructors(@ModelAttribute("i") Instructors i) {
 		try {
 			di.insertInstructor(i);
@@ -136,7 +133,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/viewInstructors", method = RequestMethod.GET)
+	@GetMapping("/viewInstructors")
 	public ModelAndView viewInstructors() {
 		try {
 			List<Instructors> list3 = di.viewAllInstructors();
@@ -147,7 +144,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "deleteInstructor/{insId}", method = RequestMethod.GET)
+	@GetMapping("deleteInstructor/{insId}")
 	public ModelAndView deleteInstructors(@PathVariable int insId) {
 		try {
 			di.deleteInstructor(insId);
@@ -159,7 +156,7 @@ public class HomeController {
 	}
 
 	// Students Requests
-	@RequestMapping(value = "/addStudents", method = RequestMethod.GET)
+	@GetMapping("/addStudents")
 	public ModelAndView addStudents(Students s) {
 		try {
 			return new ModelAndView("addStudents", "command", s);
@@ -169,7 +166,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/save4", method = RequestMethod.POST)
+	@PostMapping("/save4")
 	public ModelAndView saveStudents(@ModelAttribute("s") Students s) {
 		try {
 			di.insertStudent(s);
@@ -180,7 +177,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/viewStudents", method = RequestMethod.GET)
+	@GetMapping("/viewStudents")
 	public ModelAndView viewStudents() {
 		try {
 			List<Students> list4 = di.viewAllStudents();
@@ -191,7 +188,7 @@ public class HomeController {
 		return new ModelAndView();
 	}
 
-	@RequestMapping(value = "/deleteStudents/{studId}", method = RequestMethod.GET)
+	@GetMapping("/deleteStudents/{studId}")
 	public ModelAndView deleteStudents(@PathVariable int studId) {
 		try {
 			di.deleteStudent(studId);
