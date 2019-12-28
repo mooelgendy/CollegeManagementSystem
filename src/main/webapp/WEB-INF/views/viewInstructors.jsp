@@ -68,7 +68,7 @@
 <div class="container">
     <h1>All Instructors</h1>
 
-    <table width="100%" class="table-bordered active">
+    <table class="table-bordered active">
         <tr>
             <th>Id</th>
             <th>Name</th>

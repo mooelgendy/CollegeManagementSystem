@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
+	private static final String MODEL_NAME = "command";
+
 	@Autowired
 	public DatabaseInfo di;
 
@@ -16,7 +18,7 @@ public class HomeController {
 	@GetMapping("/")
 	public ModelAndView home() {
 		try {
-			return new ModelAndView("home", "command", new Object());
+			return new ModelAndView("home", MODEL_NAME, new Object());
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -27,7 +29,7 @@ public class HomeController {
 	@GetMapping("/addDepartment")
 	public ModelAndView addDepartment(Department d) {
 		try {
-			return new ModelAndView("addDepartment", "command", d);
+			return new ModelAndView("addDepartment", MODEL_NAME, d);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -71,7 +73,7 @@ public class HomeController {
 	@GetMapping("/addCourses")
 	public ModelAndView addCourses(Courses c) {
 		try {
-			return new ModelAndView("addCourses", "command", c);
+			return new ModelAndView("addCourses", MODEL_NAME, c);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -115,7 +117,7 @@ public class HomeController {
 	@GetMapping("/addInstructors")
 	public ModelAndView addInstructors(Instructors i) {
 		try {
-			return new ModelAndView("addInstructors", "command", i);
+			return new ModelAndView("addInstructors", MODEL_NAME, i);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -159,7 +161,7 @@ public class HomeController {
 	@GetMapping("/addStudents")
 	public ModelAndView addStudents(Students s) {
 		try {
-			return new ModelAndView("addStudents", "command", s);
+			return new ModelAndView("addStudents", MODEL_NAME, s);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

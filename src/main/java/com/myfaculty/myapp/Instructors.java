@@ -8,8 +8,6 @@ public class Instructors {
 	private String insPhone;
 	private int insSalary;
 	private int depId;
-	//private String insUsername;
-	//private String insPassword;
 	
 	public Instructors(int insId, String insName, String insAddress, String insPhone, int insSalary, int depId) {
 		super();

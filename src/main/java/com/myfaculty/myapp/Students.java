@@ -7,8 +7,6 @@ public class Students {
 	private String studAddress;
 	private String StudPhone;
 	private int depId;
-	//private String studUsername;
-	//private String studPassword;
 	
 	public Students(int studId, String studName, String studAddress, String studPhone, int depId) {
 		super();

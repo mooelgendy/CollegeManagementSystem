@@ -69,7 +69,7 @@ PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loos
 <div class="container">
     <h1>All Courses</h1>
 
-    <table width="100%" class="table-bordered active">
+    <table class="table-bordered active">
         <tr>
             <th>Code</th>
             <th>Name</th>
