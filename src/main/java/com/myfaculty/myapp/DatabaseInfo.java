@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,58 +14,63 @@ public class DatabaseInfo {
 	
 	private JdbcTemplate template;
 
-	public void setTamplate(JdbcTemplate template) {
+	@Autowired
+	public void setTemplate(JdbcTemplate template) {
 		this.template = template;
 	}
-	
+
 	//CRUD Department Database
 	public int insertDepartment (Department d){
+		int insert = 0;
 		try{
 			String insertDep = "INSERT INTO `department`(`Dep_Id`, `Dep_Name`) VALUES ( "
 					+ d.getDepId()+" , '"+d.getDepName()+"' )";
-			return template.update(insertDep);
+			insert = template.update(insertDep);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return insert;
 	}
 
 	public int updateDepartment (Department d){
+		int update = 0;
 		try{
 			String updateDep = "UPDATE `department` SET `Dep_Id`= "+d.getDepId()+
 					" , `Dep_Name`= '"+d.getDepName()+"' WHERE `dep_Id`= "+d.getDepId();
-			return template.update(updateDep);
+			update = template.update(updateDep);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return update;
 	}
 
 	public int deleteDepartment (int depId){
-		String deleteDep = null;
+		int delete = 0;
 		try{
-			deleteDep = "DELETE FROM `department` WHERE `dep_Id`= "+depId;
-			return template.update(deleteDep);
+			String deleteDep = "DELETE FROM `department` WHERE `dep_Id`= "+depId;
+			delete = template.update(deleteDep);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return delete;
 	}
 	//select by id
 	public Department departmentById (int depId){
+		Department dep = null;
 		try{
 			String sql1 = "SELECT * FROM `department` WHERE `dep_Id`= ?";
-			return template.queryForObject(sql1, new Object[]{depId}, new BeanPropertyRowMapper<Department>(Department.class));
+			dep = template.queryForObject(sql1, new Object[]{depId}, new BeanPropertyRowMapper<Department>(Department.class));
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return new Department();
+		return dep;
 	}
 
 	public List<Department> viewAllDepartments(){
+		List<Department> depList = null;
 		try{
 			String selectDep = "SELECT * FROM `department`";
-			return template.query(selectDep, new RowMapper<Department>(){
+			depList = template.query(selectDep, new RowMapper<Department>(){
 
 				@Override
 				public Department mapRow(ResultSet rs, int rownum) throws SQLException {
@@ -75,59 +82,64 @@ public class DatabaseInfo {
 				}
 			});
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return new ArrayList<Department>();
+		return depList;
 	}
 	
 	//CRUD Course Database
 	public int insertCourses (Courses c){
+		int insert = 0;
 		try{
 			String insertCo = "INSERT INTO `courses`(`Co_Id`, `Co_Name`, `Co_Hours`, `Dep_Id`, `Ins_Id`) VALUES ( " +
 					+ c.getCoId()+" , '"+c.getCoName()+"' , "+c.getCoHours() +" , "+c.getDepId()+" , "+c.getInsId()+" )";
-			return template.update(insertCo);
+			insert = template.update(insertCo);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return insert;
 	}
 
 	public int updateCourses (Courses c){
+		int update = 0;
 		try{
 			String updateCo = "UPDATE `courses` SET `Co_Id`= "+c.getCoId()+" ,`Co_Name`= '"+c.getCoName()+"' ,"
 					+ "`Co_Hours`= "+c.getCoHours()+" ,`Dep_Id`= "+c.getDepId()+" ,`Ins_Id`= "+c.getInsId()
 					+ " WHERE `Co_Id`= "+c.getCoId();
-			return template.update(updateCo);
+			update = template.update(updateCo);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return update;
 	}
 
 	public int deleteCourses (int coId){
+		int delete = 0;
 		try{
 			String deleteCo = "DELETE FROM `courses` WHERE `Co_Id`= "+coId;
-			return template.update(deleteCo);
+			delete = template.update(deleteCo);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return delete;
 	}
 
 	public Courses coursesById (int coId){
+		Courses course = null;
 		try{
 			String sql2 = "SELECT * FROM `courses` WHERE `Co_Id`= ?";
-			return template.queryForObject(sql2, new Object[]{coId}, new BeanPropertyRowMapper<Courses>(Courses.class));
+			course = template.queryForObject(sql2, new Object[]{coId}, new BeanPropertyRowMapper<Courses>(Courses.class));
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return new Courses();
+		return course;
 	}
 
 	public List<Courses> viewAllCourses (){
+		List<Courses> coList = null;
 		try{
 			String selectCo = "SELECT * FROM `courses`";
-			return template.query(selectCo, new RowMapper<Courses>() {
+			coList = template.query(selectCo, new RowMapper<Courses>() {
 
 				@Override
 				public Courses mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -142,60 +154,65 @@ public class DatabaseInfo {
 				}
 			});
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return new ArrayList<Courses>();
+		return coList;
 	}
 
 	//CRUD Instructors Database
 	public int insertInstructor (Instructors i){
+		int insert = 0;
 		try{
 			String insertIns = "INSERT INTO `instructor`(`Ins_Id`, `Ins_Name`, `Ins_Address`, `Ins_Phone`, `Ins_Salary`, `Dep_Id`) VALUES ( "
 					+i.getInsId()+" , '"+i.getInsName()+"' , '"+i.getInsAddress()+"' , '"+i.getInsPhone()+"' , " +i.getInsSalary()+" , "+i.getDepId()+" )";
-			return template.update(insertIns);
+			insert = template.update(insertIns);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return insert;
 	}
 
 	public int updateInstructor (Instructors i){
+		int update = 0;
 		try{
 			String updateIns = "UPDATE `instructor` SET `Ins_Id`= "+i.getInsId()+" ,`Ins_Name`= '"+i.getInsName()+"' ,"
 					+ "`Ins_Address`= '"+i.getInsAddress()+"' ,`Ins_Phone`= '"+i.getInsPhone()+"' ,"
 					+ "`Ins_Salary`= "+i.getInsSalary()+" ,`Dep_Id`= "+i.getDepId()
 					+" WHERE `Ins_Id`= "+i.getInsId();
-			return template.update(updateIns);
+			update = template.update(updateIns);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return update;
 	}
 
 	public int deleteInstructor (int insId){
+		int delete = 0;
 		try{
 			String deleteIns = "DELETE FROM `instructor` WHERE `Ins_Id`= "+insId;
-			return template.update(deleteIns);
+			delete = template.update(deleteIns);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return delete;
 	}
 
 	public Instructors instructorById (int insId){
+		Instructors instructor = null;
 		try{
 			String sql3 = "SELECT * FROM `instructor` WHERE `Ins_Id`= ?";
-			return template.queryForObject(sql3, new Object[]{insId}, new BeanPropertyRowMapper<Instructors>(Instructors.class));
+			instructor = template.queryForObject(sql3, new Object[]{insId}, new BeanPropertyRowMapper<Instructors>(Instructors.class));
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return new Instructors();
+		return instructor;
 	}
 
 	public List<Instructors> viewAllInstructors (){
+		List<Instructors> insList = null;
 		try{
 			String selectInstructor = "SELECT * FROM `instructor`";
-			return template.query(selectInstructor, new RowMapper<Instructors>() {
+			insList = template.query(selectInstructor, new RowMapper<Instructors>() {
 
 				@Override
 				public Instructors mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -211,58 +228,63 @@ public class DatabaseInfo {
 				}
 			});
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return new ArrayList<Instructors>();
+		return insList;
 	}
 
 	//CRUD Student Database
 	public int insertStudent (Students s){
+		int insert = 0;
 		try{
 			String InsertStud = "INSERT INTO `students`(`Stud_Id`, `Stud_Name`, `Stud_Address`, `Stud_Phone`, `Dep_Id`) VALUES ( "
 					+ s.getStudId()+" , '"+s.getStudName()+"' , '"+s.getStudAddress()+"' , " + "'"+s.getStudPhone()+"' , "+s.getDepId()+" )";
-			return template.update(InsertStud);
+			insert = template.update(InsertStud);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return insert;
 	}
 
 	public int updateStudent (Students s){
+		int update = 0;
 		try{
 			String updateStud = "UPDATE `students` SET `Stud_Id`= "+s.getStudId()+" ,`Stud_Name`= '"+s.getStudName()+"' ,"
 					+ "`Stud_Address`= '"+s.getStudAddress()+"' ,`Stud_Phone`= '"+s.getStudPhone()+"' , "
 					+ "`Dep_Id`= "+s.getDepId()+" WHERE `Stud_Id`= "+s.getStudId();
-			return template.update(updateStud);
+			update = template.update(updateStud);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return update;
 	}
 	public int deleteStudent (int studId){
+		int delete = 0;
 		try{
 			String deleteStud = "DELETE FROM `students` WHERE `Stud_Id`= "+studId;
-			return template.update(deleteStud);
+			delete = template.update(deleteStud);
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return 0;
+		return delete;
 	}
 
 	public Students studentById (int studId){
+		Students student = null;
 		try{
 			String sql4 = "SELECT * FROM `students` WHERE `Stud_Id`= ?";
-			return template.queryForObject(sql4, new Object[]{studId}, new BeanPropertyRowMapper<Students>(Students.class));
+			student = template.queryForObject(sql4, new Object[]{studId}, new BeanPropertyRowMapper<Students>(Students.class));
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return new Students();
+		return student;
 	}
 
 	public List<Students> viewAllStudents (){
+		List<Students> studList = null;
 		try{
 			String selectStud = "SELECT * FROM `students`";
-			return template.query(selectStud, new RowMapper<Students>() {
+			studList = template.query(selectStud, new RowMapper<Students>() {
 
 				@Override
 				public Students mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -277,9 +299,9 @@ public class DatabaseInfo {
 				}
 			});
 		}catch(Exception e){
-			System.out.println(e.toString());
+			System.out.println(e.getStackTrace());
 		}
-		return new ArrayList<Students>();
+		return studList;
 	}
 
 }

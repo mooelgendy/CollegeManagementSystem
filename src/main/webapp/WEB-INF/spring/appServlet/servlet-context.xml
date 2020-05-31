@@ -44,7 +44,7 @@
 		</bean>
 
 		<bean id="dbi" class="com.myfaculty.myapp.DatabaseInfo">
-			<property name="tamplate" ref="template"></property>
+			<property name="template" ref="template"></property>
 		</bean>
 
 	</beans>
